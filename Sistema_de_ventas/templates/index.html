@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Divina Amarga</title>
+	<link rel="shortcut icon" href="{{ url_for('static', filename='zapato.ico') }}" type="image/x-icon">
+	<link rel="stylesheet" href="{{ url_for('static', filename='scrollbar.css') }}">
+<style>
+	.centrar {
+  text-align: center;
+	}
+</style>
+</head>
+<body>
+	<img src="{{ url_for('static', filename='baner.jpg') }}" style="width:1290px; height:300px;" alt="Banner">
+	<h1 class="centrar">Calzado de Dama</h1> 
+	<div class="contenedor"></div>
+
+	<div class="producto_index" data-id="1" data-precio="4000">
+	    <img src="{{ url_for('static', filename='tacones_marrones.jpg') }}" style="width:120px; height:120px; margin: 0px 20px; vertical-align: bottom; float: left;" alt="Tacones marrones" class="mover_arriba">
+	    <p style="margin: 0px 20px; top: 530px; float: left;" class="mover_nombre">Tacones marrones</p>
+	    <p style="margin: 0px 30px; top: 550px; float: left;" class="mover_precio">Precio: $4000</p>
+	    <button style="margin: 0px 20px; top: 575px; float: left;" class="boton_comprar">Comprar</button>
+	    <button style="margin: 0px 115px;" class="boton_ver">
+	        <img src="{{ url_for('static', filename='visible.png') }}" style="width: 25px; height: 28px;" alt="Detalle">
+	    </button>
+	</div>
+
+	<div class="producto_index" data-id="2" data-precio="4500">
+		<img src="{{ url_for('static', filename='botas_negras.jpg') }}" style="width:110px; height:110px; margin: 0px 200px; vertical-align: bottom; float: left;" alt="Botas negras" class="mover_arriba">
+		<p style="margin: 0px 235px; top: 530px; float: left;" class="mover_nombre">Botas</p>
+		<p style="margin: 0px 210px; top: 550px; float: left;" class="mover_precio">Precio: $4500</p>
+		<button style="margin: 0px 195px; top: 575px; float: left;" class="boton_comprar">Comprar</button>
+		<form action="{{ url_for('botas_negras') }}">
+			<button style="margin: 0px 290px;" class="boton_ver">
+				<img src="{{ url_for('static', filename='visible.png') }}" style="width: 25px; height: 28px;" alt="Detalle">
+			</button>
+		</form>
+	</div>
+	
+	<div class="producto_index" data-id="3" data-precio="6000">
+		<img src="{{ url_for('static', filename='tacones_rosegold.jpg') }}" style="width:140px; height:140px; margin: -20px 350px; vertical-align: bottom; float: left;" alt="Tacones rosegold" class="mover_arriba">
+		<p style="margin: 0px 355px; top: 530px; float: left;" class="mover_nombre">Tacones rosegold</p>
+		<p style="margin: 0px 365px; top: 550px; float: left;" class="mover_precio">Precio: $6000</p>
+		<button style="margin: 0px 353px; top: 575px; float: left;" class="boton_comprar">Comprar</button>
+		<button style="margin: 0px 448px;" class="boton_ver">
+			<img src="{{ url_for('static', filename='visible.png') }}" style="width: 25px; height: 28px;" alt="Detalle">
+		</button>
+	</div>
+
+	<div id="modal-seleccion" class="modal">
+	    <div class="modal-contenido">
+	        <span class="cerrar">&times;</span>
+	        <h2>Selecciona Talle</h2>
+	        <div>
+	            <label style="display: flex; align-items: flex-start; margin-top: 10px;" for="select-talle">Talle:</label>
+	            <button style="top: 100px; margin: 20px 50px;" data-talle="36" class="boton_talle" value="36">36</button>
+	            <button style="top: 100px; margin: 20px 90px;" data-talle="37" class="boton_talle" value="37">37</button>
+	            <button style="top: 100px; margin: 20px 130px;" data-talle="38" class="boton_talle" value="38">38</button>
+	            <button style="top: 100px; margin: 20px 170px;" data-talle="39" class="boton_talle" value="39">39</button>
+	            <button style="top: 100px; margin: 20px 210px;" data-talle="40" class="boton_talle" value="40">40</button>
+	        </div>
+	        <div id="color-picker-modal" style="display: none;">
+                <label style="display: flex; align-items: flex-start; margin-top: 25px;" for="select-color">Color:</label>
+                <button style="top: 140px; margin: 20px 50px; background-color: black;" data-color="1" class="boton_color"></button>
+                <button style="top: 140px; margin: 20px 90px; background-color: #9B7044;" data-color="2" class="boton_color"></button>
+                <button style="top: 140px; margin: 20px 130px; background-color: red;" data-color="3" class="boton_color"></button>
+            </div>
+            <button style="margin-top: 25px;" class="boton_realizar_compra" id="boton-listo">Listo</button>
+        </div>
+    </div>
+
+	<div class="carrito">
+        <button class="boton_carrito" id="carrito-icono">
+            <img src="{{ url_for('static', filename='carrito.png') }}" style="width: 30px; height: 30px;" alt="Carrito">
+            <span id="carrito-contador">0</span>
+        </button>
+    </div>
+
+    <div id="carrito-modal" class="modal">
+        <div class="modal-contenido">
+            <span class="cerrar-carrito">&times;</span>
+            <h2>Carrito de Compras</h2>
+            <div id="carrito-items"></div>
+	        <div class="carrito-item-cantidad">
+	           	<img src="{{ url_for('static', filename='menos.png') }}" class="cantidad-item" alt="menos">
+	           	<input style="width: 20px;" type="number" class="cantidad" value="1" min="1" disabled>
+	           	<img style="padding: 0px 65px;" src="{{ url_for('static', filename='más.png') }}" class="cantidad-item" alt="más">
+	           	<img src="{{ url_for('static', filename='eliminar.png') }}" class="boton_eliminar" alt="eliminar">
+	        </div>
+            <p style="top: 5px">Envío: $1000</p>
+            <p style="top: 5px">Total: $<span id="carrito-total">0</span></p>
+            <form id="formulario-compra">
+                <input class="formulario-input" type="text" id="nombre_cliente" placeholder="Nombre">
+                <input class="formulario-input" type="text" id="direccion" placeholder="Dirección">
+                <button class="boton_realizar_compra" style="margin-top: 10px;" type="submit">Realizar Compra</button>
+            </form>
+        </div>
+    </div>
+    
+	<script src="{{ url_for('static', filename='boton_comprar_index.js') }}"></script>
+</body>
+</html>

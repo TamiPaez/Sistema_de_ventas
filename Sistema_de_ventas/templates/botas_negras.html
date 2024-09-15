@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Divina Amarga</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='zapato.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='scrollbar.css') }}">
+</head>
+<body>
+    <div class="producto">
+        <img src="{{ url_for('static', filename='flecha_ant.png') }}" class="flecha" id="antes" alt="flecha_ant">
+
+        <figure class="producto_img producto_img_show" data-id="1">
+            <img src="{{ url_for('static', filename='botas_negras.jpg') }}" alt="Botas negras" class="imagen_producto">
+        </figure>
+        
+        <figure class="producto_img" data-id="2">
+            <img src="{{ url_for('static', filename='botas_marron.jpg') }}" alt="Botas marron" class="imagen_producto">
+        </figure>
+
+        <figure class="producto_img" data-id="3">
+            <img src="{{ url_for('static', filename='botas_rojas.jpg') }}" alt="Botas rojas" class="imagen_producto">
+        </figure>
+        
+        <img src="{{ url_for('static', filename='flecha_sig.png') }}" class="flecha" id="siguiente" alt="flecha_sig">
+    </div>
+    <p style="margin: 0px 200px; top: 450px;" class="mover_nombre">Botas</p>
+
+    <p id="precio" style="margin: 0px 200px; top: 480px;" data-precio="4500" class="mover_precio">Precio: $4500</p>
+
+    <p style="margin: 0px 200px; top: 510px;" class="mover_color">Color:</p>
+
+    <p style="margin: 0px 200px; top: 547px;" class="mover_talle">Talle:</p>
+
+    <div class="color_picker">
+        <button class="boton_color" data-id="1" style="background-color: black;"></button>
+        <button class="boton_color" data-id="2" style="background-color: #9B7044; margin: -3px 95px;"></button>
+        <button class="boton_color" data-id="3" style="background-color: red; margin: -3px 135px;"></button>
+    </div>
+
+    <div class="talle_picker">
+        <button class="boton_talle" data-talle="35">35</button>
+        <button class="boton_talle" data-talle="36" style="margin: 35px 280px;">36</button>
+        <button class="boton_talle" data-talle="37" style="margin: 35px 320px;">37</button>
+        <button class="boton_talle" data-talle="38" style="margin: 35px 360px;">38</button>
+        <button class="boton_talle" data-talle="39" style="margin: 35px 400px;">39</button>
+        <button class="boton_talle" data-talle="40" style="margin: 35px 440px;">40</button>
+    </div>
+
+    <button id="boton_comprar" style="margin: 0px 190px; top: 585px;" class="boton_comprar">Comprar</button>
+
+    <div class="carrito">
+        <button class="boton_carrito" id="carrito-icono">
+            <img src="{{ url_for('static', filename='carrito.png') }}" style="width: 30px; height: 30px;" alt="Carrito">
+            <span id="carrito-contador">0</span>
+        </button>
+    </div>
+
+    <div id="carrito-modal" class="modal">
+        <div class="modal-contenido">
+            <span class="cerrar">&times;</span>
+            <h2>Carrito de Compras</h2>
+            <div id="carrito-items"></div>
+            <p style="top: 5px">Envío: $1000</p>
+            <p style="top: 5px">Total: $<span id="carrito-total">0</span></p>
+            <form id="formulario-compra">
+                <input class="formulario-input" type="text" id="nombre_cliente" placeholder="Nombre">
+                <input class="formulario-input" type="text" id="direccion" placeholder="Dirección">
+                <button class="boton_realizar_compra" style="margin-top: 10px;" type="submit">Realizar Compra</button>
+            </form>
+        </div>
+    </div>
+
+    <form action="{{ url_for('web_cliente') }}">
+        <button class="boton_inicio">
+            <img src="{{ url_for('static', filename='flecha_inicio.png') }}" style="width: 25px; height: 25px;"
+                alt="flecha_inicio">
+        </button>
+    </form>
+    <script src="{{ url_for('static', filename='sliders.js') }}"></script>
+</body>
+</html>
